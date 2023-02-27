@@ -25,5 +25,21 @@ export function save(todos) {
  */
 
 export function genarateId() {
-    return Date.now() + Math.random().toString(16).substring(2,4);
+    return Date.now() + Math.random().toString(16).substring(2, 4);
+}
+
+/**
+ * 
+ * @param {*} todos 所有的任务
+ * @param {*} visibility 筛选条件
+ */
+export function filter(todos, visibility = 'all') {
+    if(visibility === 'all'){
+        return todos;
+    }else if(visibility === 'completed'){
+        return todos.filter(item => item.completed)
+    }else if(visibility === 'active'){
+        return todos.filter(item => !item.completed)
+    }
+    
 }

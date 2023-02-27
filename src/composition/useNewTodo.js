@@ -14,9 +14,9 @@ export default function useNewTodo(todosRef) {
             title: value,
             completed: false,
         }
-        console.log("17",todosRef)
+        // console.log("17",todosRef)
         todosRef.value.push(todo);
-        console.log(todo);
+        // console.log(todo);
     }
     return {
         newTodoRef,
