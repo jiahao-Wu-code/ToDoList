@@ -15,14 +15,14 @@
                         <div class="view">
                             <input class="toggle" type="checkbox" v-model="todo.completed" />
                             <label @dblclick="editTodo(todo)">{{ todo.title }}</label>
-                            <button class="destroy"></button>
+                            <button class="destroy" @click="removeOne(todo)"></button>
                         </div>
-                        <input class="edit" type="text" v-model="todo.title" @blur="finishEditingTodo"
-                            @keyup.enter="finishEditingTodo" @keyup.esc="cancelEditingTodo(todo)" />
+                        <input class="edit" type="text" v-model="todo.title" @blur="finishEditingTodo(todo)"
+                            @keyup.enter="finishEditingTodo(todo)" @keyup.esc="cancelEditingTodo(todo)" />
                     </li>
                 </ul>
             </section>
-            <footer class="footer">
+            <footer class="footer" v-if="showFilter">
                 <span class="todo-count">
                     <strong>{{ remainingRef }}</strong>
                     <span> item{{ remainingRef <= 1 ? '' : 's' }} left</span>
@@ -33,7 +33,7 @@
                         <li><a href="#/completed" :class="visibilityRef === 'completed' ? 'selected' : ''">Completed</a>
                         </li>
                     </ul>
-                    <button class="clear-completed" v-show="completedRef">
+                    <button class="clear-completed" v-show="completedRef" @click="removeCompleted">
                         Clear completed
                     </button>
             </footer>
@@ -46,13 +46,20 @@ import useTodoList from './composition/useTodoList';
 import useNewTodo from './composition/useNewTodo';
 import useFilter from './composition/useFilter';
 import useEditTodo from './composition/useEditTodo';
+import useRemoveTodo from './composition/useRemoveTodo';
+import { computed } from 'vue'
 export default {
     setup() {
         const { todosRef } = useTodoList();
+        const showFilter = computed(() => {
+            return todosRef.value.length
+        })
         return {
             ...useNewTodo(todosRef),
             ...useFilter(todosRef),
             ...useEditTodo(todosRef),
+            ...useRemoveTodo(todosRef),
+            showFilter
         }
     }
 }

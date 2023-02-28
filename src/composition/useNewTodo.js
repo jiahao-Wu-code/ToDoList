@@ -16,6 +16,8 @@ export default function useNewTodo(todosRef) {
         }
         // console.log("17",todosRef)
         todosRef.value.push(todo);
+        // 新增成功后 清空输入框
+        newTodoRef.value = '';
         // console.log(todo);
     }
     return {
