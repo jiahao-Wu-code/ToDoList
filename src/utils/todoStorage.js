@@ -1,4 +1,4 @@
-const LOCAL_KEY = 'todomvc';
+const LOCAL_KEY = 'TO_DO_MVC';
 
 /**
  * 获取目前所有的任务
