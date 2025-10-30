@@ -34,6 +34,7 @@ export function genarateId() {
  * @param {*} visibility 筛选条件
  */
 export function filter(todos, visibility = 'all') {
+    console.log("11111")
     if(visibility === 'all'){
         return todos;
     }else if(visibility === 'completed'){
